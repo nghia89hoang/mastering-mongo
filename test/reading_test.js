@@ -1,4 +1,4 @@
-const asset = require('assert')
+const assert = require('assert')
 const User = require('../src/user')
 
 describe('Reading user out of database', () => {
@@ -12,6 +12,14 @@ describe('Reading user out of database', () => {
     User.find({name: 'Joe'})
       .then((users) => {
         assert(users[0]._id.toString() === joe._id.toString())
+        done()
+      })
+  })
+
+  it('Find user with particular id', (done) => {
+    User.findOne({_id : joe._id})
+      .then((user) => {
+        assert(user.name === joe.name)
         done()
       })
   })
