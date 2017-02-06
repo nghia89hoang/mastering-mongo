@@ -13,8 +13,12 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
-  posts: [PostSchema],
-  likes: Number
+  posts: [PostSchema],// just asub document example
+  likes: Number,
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 })
 // care fat arrow func
 UserSchema.virtual('postCount').get(function() {

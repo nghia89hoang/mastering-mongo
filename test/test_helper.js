@@ -13,9 +13,15 @@ before((done) => {
 })
 
 // Hook: function that will be executed before any test get executed inside the suit
-beforeEach((done) => {  
-  mongoose.connection.collections.users.drop(() => {
-    // Ready to run the next test!
-    done()
+beforeEach((done) => {
+  const { users, comments, blogposts } = mongoose.connection.collections
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        done()
+      })
+    })
   })
+  // Promise.all([users.drop(), comments.drop(), blogposts.drop()])
+  //   .then(() => done())
 })
