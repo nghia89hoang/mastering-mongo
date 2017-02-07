@@ -21,10 +21,6 @@ describe('Associations', () => {
     blogPost.comments.push(comment)
     comment.user = joe
 
-    joe.save()
-    blogPost.save()
-    comment.save()
-
     Promise.all([joe.save(), blogPost.save(), comment.save()])
       .then(() => done())
   })
